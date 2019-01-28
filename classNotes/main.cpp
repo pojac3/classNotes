@@ -1,4 +1,7 @@
 //
+//  This class is used to take notes in my data structures class. The code
+//  seen here is only meant as a test and will be heavily commented
+//
 //  main.cpp
 //  classNotes
 //
@@ -9,8 +12,13 @@
 #include <iostream>
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
     std::cout << "Sami is quadruple gay\n";
+    
+    //Begin notes
+    
+    //January 28
+    
+    
+    //End notes
     return 0;
 }
