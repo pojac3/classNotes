@@ -1,47 +1,49 @@
-//Class notes Feb 13, Data Structures
-//We are currently in chapter 3 of the textbook
-//
+/*
+ understand array, overloaded = operator, destructor, overloaded brackets, ArrayClass
+ understand class definition, write only method prototypes in the public field
+ understand overloaded [] operator
+ ArrayClass<SparseRow<int>>
+ ArrayClass<char> <-- String
+ ArrayClass<int*>* one
+ one = new ArrayClass<int*>(10);
+ for loop to initialize each element there
+ (*one)[i] = new int(0);
+
+ ArrayClass<ArrayClass<int>*>* two;
+ two = new ArrayClass<ArrayClass<int>*>(10);
+ for loop
+ *(two)[i] = new ArrayClass<int>(10);
+
+ int mat[i][j]
+ SparseMatrix
+ ArrayClass of ArrayClass objects
+ Row major ordering
+ Column major ordering
+ 
+ sorting algorithms
+ merge sort algorithm
+ simple bucket sort => O(n+m)
+ 
+ simple binary search => O(log(n))
+ 
+ */
+
 #include <iostream>
 using namespace std;
 
-int x[100];
-int* y = new int[100];
-
-template <class DT>
-class ArrayClass {
-public:
-    AbstractArrayClass<DT>;
-protected:
-    DT* _myArray;
-    //ArrayException would contain ArrayOutOfBoundsException and ArrayOutOfMemoryException
-    int _size;
-    
-};
-
-template <class DT>
-ArrayClass<DT>& ArrayClass<DT>::operator= {
-    _myArray = AC.myArray;
-    delete[] _myArray;
-    _myArray = new DT[AC.sign()];
-    _size = AC.size();
-    for (int i = 0; i < _size; i++) {
-        
+//sorta kinda binarySearch
+bool binarySearch (int A, int L, int R, int key) {
+    if (L < R) {
+        int mid = ((L+R)/2);
+        if (A[mid] == key) {
+            return true;
+        } else if (A[mid] > key) {
+            binarySearch (A, (L+R/2), mid, key);
+        }
+    } else {
+        return false;
     }
-};
-
-int main() {
-    
-    ArrayClass<int> x(100);
-    ArrayClass<int>* y = new ArrayClass<int>(5);
-    
-    for (int i = 0; i < x.size; i++) {
-        x[i] = 0;
-    }
-    
-    
-    
-    
-    //must have get method, set (i,value), size and
 }
 
-//QUIZ QUESTION:
+int main() {
+}
