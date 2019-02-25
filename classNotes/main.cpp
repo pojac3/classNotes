@@ -1,49 +1,37 @@
 /*
- understand array, overloaded = operator, destructor, overloaded brackets, ArrayClass
- understand class definition, write only method prototypes in the public field
- understand overloaded [] operator
- ArrayClass<SparseRow<int>>
- ArrayClass<char> <-- String
- ArrayClass<int*>* one
- one = new ArrayClass<int*>(10);
- for loop to initialize each element there
- (*one)[i] = new int(0);
-
- ArrayClass<ArrayClass<int>*>* two;
- two = new ArrayClass<ArrayClass<int>*>(10);
- for loop
- *(two)[i] = new ArrayClass<int>(10);
-
- int mat[i][j]
- SparseMatrix
- ArrayClass of ArrayClass objects
- Row major ordering
- Column major ordering
- 
- sorting algorithms
- merge sort algorithm
- simple bucket sort => O(n+m)
- 
- simple binary search => O(log(n))
- 
+ * LinkedList works by keeping track of where the next piece of information can be found. In arrays, the information is all next to each other.
+ * When we insert data into a vector, we have to move all the data around so that we can keep track of where it all is
+ * LinkedList does not have to shift anybody around! Uses pointers to not have to do that.
+ * info means tell me what u got
+ * size(), info(), add(), insert(), LinkedList is a recursive defintition. points to another LinkedList!
+ * LinkedList has a piece of info which points to another piece of the LinkedList.
+ * if i want info at the 3rd position, i can build infoAt from info and next operation. Every element of a LinkedList is a LinkedList.
+ * All these operations can be done on an array. Thats why you need a primitive data type
  */
 
 #include <iostream>
 using namespace std;
 
-//sorta kinda binarySearch
-bool binarySearch (int A, int L, int R, int key) {
-    if (L < R) {
-        int mid = ((L+R)/2);
-        if (A[mid] == key) {
-            return true;
-        } else if (A[mid] > key) {
-            binarySearch (A, (L+R/2), mid, key);
-        }
-    } else {
-        return false;
-    }
-}
+template <class DT>
+class LinkedList {
+protected:
+    DT* _info;
+    DT* _size;
+    LinkedList _next;
+public:
+    LinkedList<DT>();
+    LinkedList<DT>(const LinkedList<DT>& LL);
+    LinkedList<DT>& operator= (const LinkedList<DT>& LL);
+    ~LinkedList();
+    LinkedList<DT> next();
+    int size();
+    void remove();
+    void add(LinkedList<DT>& LL);
+    DT& info();
+    DT& operator[] (int x);
+};
 
 int main() {
-}
+    LinkedList<int>* myL;
+    myL = new LinkedList<int>();
+};
