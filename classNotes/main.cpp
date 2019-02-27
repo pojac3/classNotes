@@ -1,12 +1,11 @@
+//VERY IMPORTANT CLASS THAT TELLS U HOW TO DO A LINKED LIST
 /*
- * LinkedList works by keeping track of where the next piece of information can be found. In arrays, the information is all next to each other.
- * When we insert data into a vector, we have to move all the data around so that we can keep track of where it all is
- * LinkedList does not have to shift anybody around! Uses pointers to not have to do that.
- * info means tell me what u got
- * size(), info(), add(), insert(), LinkedList is a recursive defintition. points to another LinkedList!
- * LinkedList has a piece of info which points to another piece of the LinkedList.
- * if i want info at the 3rd position, i can build infoAt from info and next operation. Every element of a LinkedList is a LinkedList.
- * All these operations can be done on an array. Thats why you need a primitive data type
+ * Point Implementation
+ * Array Implementation
+ *
+ * Project Talk: you have to implement LinkedList. f(x) = 2x^5 - 3x^2 + 10x - 500
+ * we will create a class called term that will store the terms of a polynomial. class term has a coefficient and an exponent variable
+ * class polynomial has a linkedlist of terms
  */
 
 #include <iostream>
@@ -16,22 +15,106 @@ template <class DT>
 class LinkedList {
 protected:
     DT* _info;
-    DT* _size;
-    LinkedList _next;
+    LinkedList<DT>* _next;
+    int _size;
 public:
-    LinkedList<DT>();
-    LinkedList<DT>(const LinkedList<DT>& LL);
-    LinkedList<DT>& operator= (const LinkedList<DT>& LL);
-    ~LinkedList();
-    LinkedList<DT> next();
+    LinkedList();
+    LinkedList(DT& i, LinkedList<DT>* n);
+    virtual ~LinkedList();
+    DT& operator[](int pos);
     int size();
+    void add(LinkedList<DT>& newOne);
+    void add(DT& other);
+    void insertAt(int pos, DT& x);
     void remove();
-    void add(LinkedList<DT>& LL);
-    DT& info();
-    DT& operator[] (int x);
+    DT& infoAt(int pos);
+    
 };
 
-int main() {
-    LinkedList<int>* myL;
-    myL = new LinkedList<int>();
+template <class DT>
+LinkedList<DT>::LinkedList() {
+    _info = NULL;
+    _next = NULL;
 };
+
+template <class DT>
+LinkedList<DT>::LinkedList(DT& i, LinkedList<DT>* n) {
+    _info = i;
+    _next = n;
+};
+
+template <class DT>
+LinkedList<DT>::~LinkedList<DT>() {
+    if (_info == NULL){
+        return;
+    }
+    else {
+        delete _info;
+        delete _next;
+    }
+}
+
+template <class DT>
+int LinkedList<DT>::size() {
+    if (_info == NULL) return 0;
+    return (1+(*_next).size());
+};
+
+//ADD ADDS TO THE BEGINNING OF THE LINKEDLIST
+
+template <class DT>
+void LinkedList<DT>::add(LinkedList<DT>& newOne) {
+    
+};
+
+template <class DT>
+void LinkedList<DT>::add(DT& other) {
+    LinkedList<DT>* temp = new LinkedList<DT>(_info,_next);
+    _info = new DT(other);
+    _next = temp;
+};
+
+template <class DT>
+void LinkedList<DT>::insertAt(int pos, DT& x) {
+    if (pos == 0) {
+        add(x);
+    }
+    else {
+        (*_next).insertAt(pos-1,x);
+    }
+}
+
+template <class DT>
+void LinkedList<DT>::remove() {
+    if (_info != NULL) {
+        delete _info;
+        LinkedList<DT>* temp = _next;
+        _info = (*temp)._info;
+        _next = (*temp)._next;
+        (*temp)._info = NULL;
+        (*temp)._next = NULL;
+        delete temp;
+    }
+}
+
+template<class DT>
+DT& LinkedList<DT>::infoAt(int pos) {
+    if (pos == 0) {
+        return *_info;
+    }
+    else {
+        return (*_next).infoAt(pos-1);
+    }
+}
+
+template <class DT>
+DT& LinkedList<DT>::operator[](int pos) {
+    return infoAt(pos);
+}
+
+int main() {
+    LinkedList<int>* one = new LinkedList<int>();
+    LinkedList<int>* two = new LinkedList<int>();
+    
+    return 0;
+}
